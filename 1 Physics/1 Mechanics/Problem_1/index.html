@@ -48,6 +48,16 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#investigating-the-range-as-a-function-of-the-angle-of-projection">Investigating the Range as a Function of the Angle of Projection</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-analysis-of-the-range">2. Analysis of the Range</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-python-simulation">3. Python Simulation</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -172,83 +182,138 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<h1 id="investigating-the-range-as-a-function-of-the-angle-of-projection">Investigating the Range as a Function of the Angle of Projection</h1>
-<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
-<h3 id="governing-equations-of-motion">Governing Equations of Motion</h3>
-<p>Projectile motion follows two-dimensional kinematics under the influence of gravity. The key equations of motion are:</p>
+<h2 id="investigating-the-range-as-a-function-of-the-angle-of-projection">Investigating the Range as a Function of the Angle of Projection</h2>
+<h3 id="1-theoretical-foundation">1. Theoretical Foundation</h3>
+<p>Projectile motion follows Newton’s laws of motion. The fundamental equations describing the motion of a projectile launched with initial speed <span class="arithmatex">\(v_0\)</span> at an angle <span class="arithmatex">\(\theta\)</span> (neglecting air resistance) are derived from kinematic equations.</p>
+<h4 id="equations-of-motion"><strong>Equations of Motion</strong></h4>
+<p>The horizontal and vertical components of velocity are:</p>
+<div class="arithmatex">\[
+ v_{0x} = v_0 \cos\theta 
+\]</div>
+<div class="arithmatex">\[
+ v_{0y} = v_0 \sin\theta 
+\]</div>
+<p>The position as a function of time is given by:</p>
+<div class="arithmatex">\[
+ x(t) = v_0 \cos\theta \cdot t 
+\]</div>
+<div class="arithmatex">\[
+ y(t) = v_0 \sin\theta \cdot t - \frac{1}{2} g t^2 
+\]</div>
+<p>where <span class="arithmatex">\(g\)</span> is the acceleration due to gravity.</p>
+<h4 id="time-of-flight"><strong>Time of Flight</strong></h4>
+<p>The projectile returns to the ground when <span class="arithmatex">\(y = 0\)</span>:</p>
+<div class="arithmatex">\[
+ 0 = v_0 \sin\theta \cdot t - \frac{1}{2} g t^2 
+\]</div>
+<p>Solving for <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[
+ t = \frac{2 v_0 \sin\theta}{g} 
+\]</div>
+<h4 id="range-of-the-projectile"><strong>Range of the Projectile</strong></h4>
+<p>The range <span class="arithmatex">\(R\)</span> is the horizontal distance when <span class="arithmatex">\(y = 0\)</span>:</p>
+<div class="arithmatex">\[
+ R = v_0 \cos\theta \cdot t 
+\]</div>
+<p>Substituting <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[
+ R = \frac{v_0^2 \sin 2\theta}{g} 
+\]</div>
+<p>This equation shows that the range is maximized when <span class="arithmatex">\(\theta = 45^\circ\)</span>.</p>
+<hr/>
+<h3 id="2-analysis-of-the-range">2. Analysis of the Range</h3>
 <ul>
-<li><strong>Horizontal Motion</strong> (constant velocity):
-  $$
-  x(t) = v_0 \cos(\theta) t
-  $$</li>
-<li><strong>Vertical Motion</strong> (accelerated motion due to gravity):
-  $$
-  y(t) = v_0 \sin(\theta) t - \frac{1}{2} g t^2
-  $$</li>
+<li>The range is symmetric about <span class="arithmatex">\(45^\circ\)</span>.</li>
+<li>Increasing <span class="arithmatex">\(v_0\)</span> increases the range quadratically.</li>
+<li>Higher gravitational acceleration <span class="arithmatex">\(g\)</span> reduces the range.</li>
 </ul>
-<p>where:
-- $ v_0 $ = initial velocity
-- $ \theta $ = angle of projection
-- $ g $ = acceleration due to gravity (typically $ 9.81 \, m/s^2 $)
-- $ x(t) $ and $ y(t) $ represent position at time $ t $</p>
-<h3 id="time-of-flight">Time of Flight</h3>
-<p>The projectile reaches the ground when $ y = 0 $:
-$$
- t_f = \frac{2 v_0 \sin(\theta)}{g}
-$$</p>
-<h3 id="range-of-the-projectile">Range of the Projectile</h3>
-<p>The horizontal range is given by:
-$$
-R = \frac{v_0^2 \sin(2\theta)}{g}
-$$</p>
-<h3 id="maximum-height">Maximum Height</h3>
-<p>The peak height is:
-$$
-H = \frac{v_0^2 \sin^2(\theta)}{2g}
-$$</p>
-<h2 id="2-analysis-of-the-range">2. Analysis of the Range</h2>
-<ul>
-<li>The range $ R $ depends on $ \theta $ through the $ \sin(2\theta) $ function.</li>
-<li>The maximum range occurs at $ \theta = 45^\circ $, since $ \sin(90^\circ) = 1 $.</li>
-<li>Increasing $ v_0 $ increases $ R $ quadratically.</li>
-</ul>
-<h2 id="3-example-calculations">3. Example Calculations</h2>
-<h3 id="example-1-compute-the-range-for-different-angles">Example 1: Compute the Range for Different Angles</h3>
-<p>Let $ v_0 = 20 $ m/s and $ g = 9.81 $ m/s².
-- For $ \theta = 30^\circ $:
-  $$
-  R = \frac{20^2 \sin(60^\circ)}{9.81} \approx 35.3 \text{ m}
-  $$
-- For $ \theta = 45^\circ $:
-  $$
-  R = \frac{20^2 \sin(90^\circ)}{9.81} \approx 40.8 \text{ m}
-  $$</p>
-<h2 id="4-python-simulation">4. Python Simulation</h2>
+<hr/>
+<h3 id="3-python-simulation">3. Python Simulation</h3>
+<p>Below is a Python script to visualize the range as a function of angle:</p>
+<p><img alt="alt text" src="../image-3.png"/></p>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
-def projectile_range(v0, theta, g=9.81):
-    theta_rad = np.radians(theta)
-    return (v0**2 * np.sin(2 * theta_rad)) / g
+g = 9.81  # Acceleration due to gravity (m/s^2)
+v0 = 20  # Initial velocity (m/s)
 
-thetas = np.linspace(0, 90, 100)
-ranges = [projectile_range(20, theta) for theta in thetas]
+theta = np.linspace(0, 90, 100)  # Angle from 0 to 90 degrees
+R = (v0**2 * np.sin(2 * np.radians(theta))) / g
 
-plt.plot(thetas, ranges)
-plt.xlabel('Launch Angle (degrees)')
+plt.figure(figsize=(8, 5))
+plt.plot(theta, R, label=f'v0 = {v0} m/s')
+plt.xlabel('Angle of Projection (degrees)')
 plt.ylabel('Range (m)')
-plt.title('Projectile Range vs. Launch Angle')
+plt.title('Projectile Range vs. Angle of Projection')
+plt.legend()
+plt.grid()
 plt.show()
 </code></pre>
-<p><img alt="alt text" src="../image.png"/></p>
-<h2 id="5-discussion">5. Discussion</h2>
+<hr/>
+<h1 id="forced-damped-pendulum-applications-and-implementation"><strong>Forced Damped Pendulum: Applications and Implementation</strong></h1>
+<h2 id="3-practical-applications"><strong>3. Practical Applications</strong></h2>
+<p>The <strong>forced damped pendulum</strong> is widely used in real-world applications:</p>
+<h3 id="1-energy-harvesting-devices"><strong>1. Energy Harvesting Devices</strong></h3>
 <ul>
-<li>The parabolic shape of the curve confirms that the optimal angle is $ 45^\circ $.</li>
-<li>Air resistance is ignored but would reduce the range in real scenarios.</li>
-<li>Uneven terrain would modify the equations, requiring numerical solutions.</li>
+<li>Systems like <strong>electromagnetic energy harvesters</strong> utilize forced damped pendulums to convert mechanical vibrations into electrical energy.  </li>
+<li><strong>Example:</strong> Piezoelectric energy harvesting in wearable devices.</li>
 </ul>
-<p>This document provides a structured approach to understanding and simulating projectile motion.
-...</p>
+<h3 id="2-suspension-bridges-structural-engineering"><strong>2. Suspension Bridges &amp; Structural Engineering</strong></h3>
+<ul>
+<li>Bridges experience oscillations due to wind, traffic, and seismic activity, modeled using a forced damped pendulum.  </li>
+<li><strong>Example:</strong> The <strong>Tacoma Narrows Bridge</strong> collapse due to resonance effects.</li>
+</ul>
+<h3 id="3-oscillating-circuits-rlc-circuits-in-electronics"><strong>3. Oscillating Circuits (RLC Circuits in Electronics)</strong></h3>
+<ul>
+<li>The equation governing an <strong>RLC circuit</strong> (with resistance, inductance, and capacitance) is mathematically equivalent to a forced damped pendulum.  </li>
+<li><strong>Example:</strong> Radio-frequency circuits where damping affects signal stability.</li>
+</ul>
+<hr/>
+<h2 id="4-implementation-computational-model"><strong>4. Implementation: Computational Model</strong></h2>
+<p>We numerically simulate the motion of a <strong>forced damped pendulum</strong> and visualize its behavior.</p>
+<h3 id="mathematical-model"><strong>Mathematical Model</strong></h3>
+<p>The equation of motion is:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \sin\theta = A \cos(\omega t)
+\]</div>
+<p>where:</p>
+<p>$$ \gamma $$ - is the damping coefficient,<br/>
+$$ \omega_0 $$ - is the natural frequency,<br/>
+$$ A $$ - is the amplitude of the external driving force,<br/>
+$$ \omega $$ - is the driving frequency.</p>
+<h2 id="to-observe-chaos-we-plot-the-poincare-section">To observe chaos, we plot the Poincaré section:</h2>
+<p><img alt="alt text" src="../image-4.png"/></p>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp</p>
+<h1 id="constants">Constants</h1>
+<p>gamma = 0.2  # Damping coefficient
+omega0 = 1.5  # Natural frequency
+A = 1.2  # Driving force amplitude
+omega = 2.0  # Driving frequency</p>
+<h1 id="equations-of-motion_1">Equations of motion</h1>
+<p>def forced_damped_pendulum(t, y):
+    theta, omega_theta = y
+    dtheta_dt = omega_theta
+    domega_dt = -gamma * omega_theta - omega0**2 * np.sin(theta) + A * np.cos(omega * t)
+    return [dtheta_dt, domega_dt]</p>
+<h1 id="time-range">Time range</h1>
+<p>t_span = (0, 50)
+t_eval = np.linspace(*t_span, 1000)</p>
+<h1 id="initial-conditions">Initial conditions</h1>
+<p>y0 = [0.2, 0]</p>
+<h1 id="solve-the-differential-equation">Solve the differential equation</h1>
+<p>sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval)</p>
+<h1 id="phase-diagram">Phase Diagram</h1>
+<p>plt.figure(figsize=(8, 5))
+plt.plot(sol.y[0], sol.y[1], color='b', label='Phase Space')
+plt.xlabel(r'<span class="arithmatex">\(\theta\)</span> (rad)')
+plt.ylabel(r'<span class="arithmatex">\(\frac{d\theta}{dt}\)</span> (rad/s)')
+plt.title('Phase Diagram of the Forced Damped Pendulum')
+plt.legend()
+plt.grid(True)
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
