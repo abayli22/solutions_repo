@@ -82,5 +82,6 @@ plt.show()
 - Uneven terrain would modify the equations, requiring numerical solutions.
 
 This document provides a structured approach to understanding and simulating projectile motion.
+...
 
 
